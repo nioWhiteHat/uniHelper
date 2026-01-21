@@ -1,0 +1,125 @@
+.navbar-container {
+    background-color: #ffffff;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* Left - Logo */
+.navbar-left {
+    flex: 1;
+    cursor: pointer;
+}
+
+.navbar-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Center - Search */
+.navbar-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #65676b;
+    cursor: pointer;
+}
+
+.navbar-input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #f0f2f5;
+    font-size: 15px;
+    color: #050505;
+    outline: none;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.navbar-input:focus {
+    background-color: #e4e6eb;
+}
+
+/* Search Dropdown */
+.search-dropdown {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 1001;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.search-item {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-item:hover {
+    background-color: #f2f2f2;
+}
+
+.search-item-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #050505;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.search-item-meta {
+    font-size: 12px;
+    color: #65676b;
+}
+
+/* Burger Button (If you uncomment it later) */
+.burger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.burger-line {
+    width: 20px;
+    height: 2px;
+    background-color: #050505;
+    border-radius: 2px;
+}

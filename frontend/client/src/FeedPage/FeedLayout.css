@@ -1,0 +1,129 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+
+.FeedLayout {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- MAIN CONTAINER LAYOUT --- */
+.FeedAndFiltersContainer {
+    /* 1. Make it a Flex Row */
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start; /* Aligns items to top */
+    justify-content: center;
+    gap: 20px; /* Gap between Feed and Sidebar */
+    
+    /* 2. Increase Width to fit both columns */
+    max-width: 1000px; 
+    width: 100%;
+    margin: 20px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+/* --- FEED COLUMN (Left) --- */
+/* We target the div that the <Feed /> component returns. 
+   Since we can't easily add a class to it without editing Feed.tsx, 
+   we assume it's the first child. */
+.FeedAndFiltersContainer > div:first-child {
+    flex: 1; /* Takes up all remaining space */
+    min-width: 0; /* Prevents flex issues with text overflow */
+    max-width: 650px; /* Optional: Stops feed from getting too wide */
+}
+
+.FeedPostsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- FILTER SIDEBAR (Right) --- */
+.FilterLabelsContainer {
+    width: 300px; /* Fixed width for sidebar */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* Sticky Positioning */
+    position: sticky;
+    top: 80px; /* Stick 80px from top (accounts for NavBar height) */
+    height: fit-content;
+    max-height: calc(100vh - 100px); /* Prevent it from being taller than screen */
+    overflow-y: auto; /* Scroll inside sidebar if too many tags */
+}
+
+/* --- FILTER LABELS STYLING --- */
+.InterestLabelsSection, 
+.LessonLabelsSection {
+    margin-bottom: 25px;
+}
+
+.FilterLabelsContainer h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #65676b;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.LabelsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* The Buttons (Chips) */
+.LabelsList button {
+    background-color: #f0f2f5;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #050505;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.LabelsList button:hover {
+    background-color: #e4e6eb;
+}
+
+/* Active State (Selected) */
+.LabelsList button.active {
+    background-color: #e7f3ff; /* Blue background */
+    color: #1877f2; /* Blue text */
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px #1877f2; /* Blue border effect */
+}
+
+/* --- RESPONSIVE (Mobile) --- */
+@media (max-width: 850px) {
+    .FeedAndFiltersContainer {
+        flex-direction: column-reverse; /* Put Filters ON TOP of Feed on mobile? */
+        /* Or just 'column' if you want filters at the bottom */
+    }
+
+    .FilterLabelsContainer {
+        width: 100%; /* Full width on mobile */
+        position: static; /* Remove sticky on mobile */
+        margin-bottom: 20px;
+    }
+    
+    .FeedAndFiltersContainer > div:first-child {
+        max-width: 100%;
+    }
+}

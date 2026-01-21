@@ -1,0 +1,86 @@
+/* Container to center the card on the screen */
+.SignInPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary); /* Light gray background */
+    padding: 1rem;
+}
+
+/* The White Card */
+.SignInCard {
+    background-color: var(--bg-main);
+    width: 100%;
+    max-width: 400px; /* Prevents it from getting too wide on desktop */
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.SignInCard h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+/* Flex container for the form elements */
+.CredentialContainerForSignIn {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* consistent spacing between inputs */
+}
+
+/* Shared styles for both inputs */
+.UsernameInputField,
+.PasswordInputField {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: var(--bg-input);
+}
+
+/* Focus State (When user clicks inside) */
+.UsernameInputField:focus,
+.PasswordInputField:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light); /* Nice glow effect */
+    background-color: #fff;
+}
+
+.SignInButton {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.85rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.SignInButton:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Footer Area */
+.CreateAccount {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.CreateAccount span {
+    margin-right: 0.5rem;
+}
+
+/* The Link style is inherited from index.css, but we can make it bold */
+.CreateAccount a {
+    font-weight: 600;
+}

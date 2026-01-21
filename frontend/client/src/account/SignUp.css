@@ -1,0 +1,114 @@
+/* Container acts like the page background */
+.SignUpContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-secondary); /* Light gray */
+    padding: 1rem;
+}
+
+.SignUpContentWrapper {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SignUpContentWrapper h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    font-size: 1.8rem;
+}
+
+/* The White Card */
+.SignUpCredentialsCard {
+    background-color: var(--bg-main);
+    width: 100%;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* Spacing between inputs */
+}
+
+/* Input Styles - Targeting all your specific classes */
+.NameInputField, 
+.LastNameInputField, 
+.EmailInputField, 
+.SemesterInputField, 
+.PasswordInputField {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    background-color: var(--bg-input);
+    transition: all 0.2s;
+}
+
+.NameInputField:focus, 
+.LastNameInputField:focus, 
+.EmailInputField:focus, 
+.SemesterInputField:focus, 
+.PasswordInputField:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+    outline: none;
+    background-color: #fff;
+}
+
+/* Error State styling */
+.input-error {
+    border-color: var(--danger);
+    background-color: #fff5f5;
+}
+
+.ErrorText {
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.GlobalError {
+    background-color: #fef2f2;
+    color: var(--danger);
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+    border: 1px solid #fecaca;
+}
+
+/* Button */
+.SignUpButton {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.9rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.SignUpButton:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Footer Link */
+.LoginRedirect {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.LoginRedirect a {
+    font-weight: 600;
+    margin-left: 0.5rem;
+}

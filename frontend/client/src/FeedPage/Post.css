@@ -1,0 +1,140 @@
+/* The Card Container */
+.Post {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+/* Title */
+.PostTitle {
+    padding: 15px 15px 10px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #050505;
+}
+
+.StudentPosted {
+    font-size: 14px;
+    color: #65676b;
+    margin-top: 4px;
+}
+
+/* Image */
+.PostImage {
+    width: 100%;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+}
+
+.PostImg {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Prevent extremely tall images */
+    object-fit: cover;
+    display: block;
+}
+
+/* Description */
+.PostDescription {
+    padding: 12px 15px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #050505;
+}
+
+/* Ratings (Like/Dislike) */
+.PostRatings {
+    padding: 0 15px 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee; /* Divider */
+}
+
+.PostLikeDislike {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    color: #65676b;
+    font-size: 14px;
+}
+
+/* Using CSS pseudo-elements for icons since you have empty divs */
+.LikeImg, .DislikeImg {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LikeImg::before {
+    content: "👍"; /* Or use an SVG icon */
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.DislikeImg::before {
+    content: "👎";
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.LikeImg:hover, .DislikeImg:hover {
+    background-color: #f2f2f2;
+}
+
+/* Labels Container */
+.PostLessonLabels, .PostInterestLabels {
+    padding: 8px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Common Label Style */
+.PostLabel {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Specific Colors for Lessons vs Interests */
+/* Lessons: Blue Theme */
+.PostLessonLabels .PostLabel {
+    background-color: #e7f3ff;
+    color: #1877f2;
+}
+
+/* Interests: Green Theme */
+.PostInterestLabels .PostLabel {
+    background-color: #e4f6e6;
+    color: #0d8a2e;
+}
+
+/* Last Comment Section */
+.PostLastComment {
+    margin: 0 15px 10px 15px;
+    padding: 10px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #4b4c4f;
+    font-style: italic;
+}
+
+/* Date */
+.PostDate {
+    padding: 0 15px 15px 15px;
+    font-size: 12px;
+    color: #90949c;
+    text-align: right;
+}
