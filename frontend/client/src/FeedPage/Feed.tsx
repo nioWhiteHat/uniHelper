@@ -13,17 +13,18 @@ export interface Post{
     lessons_labels:Array<string>,
     total_likes:number,
     total_dislikes:number,
-    lastComment:Comment|null
+    lastComment?:Comment|null
 }
-interface FeedResponse{
-    posts:Array<Post>,
-    
-}
+
 interface Comment{
     student:Student,
     id:number,
     text:string,
     date:String
+}
+interface FeedResponse{
+    posts:Array<Post>,
+    
 }
 interface Student{
     id:number,
@@ -40,6 +41,7 @@ interface FeedProps{
 
 const Feed = ({InterestLabels,LessonLabels,SearchText,postId}:FeedProps) => {
     const token = localStorage.getItem('token');
+    console.log(token);
     let GeneralFeed = false;
     if (InterestLabels.length === 0 && LessonLabels.length === 0 ){
         GeneralFeed = true;
@@ -49,7 +51,7 @@ const Feed = ({InterestLabels,LessonLabels,SearchText,postId}:FeedProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [Scroller,SetScroller] = useState<number>(0);
 
-   
+    
     useEffect(() => {
         setLoading(true);
 
@@ -90,6 +92,9 @@ const Feed = ({InterestLabels,LessonLabels,SearchText,postId}:FeedProps) => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [loading]); 
+    useEffect(() => {
+        SetScroller(0);
+    }, [SearchText,InterestLabels,LessonLabels,postId]);
 
     return (
         <div>

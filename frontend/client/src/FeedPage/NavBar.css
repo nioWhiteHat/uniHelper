@@ -1,5 +1,5 @@
 .navbar-container {
-    background-color: #ffffff;
+    background-color: #cac6c6;
     height: 60px;
     width: 100%;
     display: flex;
@@ -11,6 +11,7 @@
     top: 0;
     z-index: 1000;
     box-sizing: border-box;
+    border-radius: 20px;
 }
 
 /* Left - Logo */
@@ -62,7 +63,7 @@
 }
 
 .navbar-input:focus {
-    background-color: #e4e6eb;
+    background-color: #abadb3;
 }
 
 /* Search Dropdown */
@@ -71,7 +72,7 @@
     top: 110%;
     left: 0;
     width: 100%;
-    background: white;
+    background: rgb(183, 170, 170);
     border-radius: 8px;
     box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     padding: 8px 0;

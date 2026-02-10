@@ -27,18 +27,76 @@ const SignIn = async (req, res) => {
         }
         console.log("User authenticated successfully");
         const token = jwt.sign(
-            { id: student.id, name: student.name, image: student.image }, // Payload
+            { id: student.id, name: student.name }, // Payload
             process.env.JWT_SECRET,                 // Secret Key
             { expiresIn: '5h' }                     
         );
         console.log("JWT token generated");
       
-        res.json({ token });
+        res.json({ token:token,id:student.id });
     } catch (err) {
-        console.error(err.message);
+        console.log('in err')
+        console.log(err);
         res.status(500).send("Server Error");
     }
 };
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client("166943264625-em1456pb12r7ebvof9548b35os24obch.apps.googleusercontent.com");
+
+const GoogleSignIn = async (req, res) => {
+    const { token } = req.body;
+
+    try {
+        // 1. Verify the Google Token
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: "166943264625-em1456pb12r7ebvof9548b35os24obch.apps.googleusercontent.com",
+        });
+        const payload = ticket.getPayload();
+        
+        const { email, given_name, family_name, picture } = payload;
+
+        // 2. Check if user exists in DB
+        const result = await db.query('SELECT * FROM student WHERE email = $1', [email]);
+        
+        let student;
+
+        if (result.rows.length === 0) {
+            // 3. User does NOT exist -> Register them automatically
+            // We set a default password and semester=1 since Google doesn't provide these
+            console.log("Creating new Google user...");
+            
+            const defaultPassword = await bcrypt.hash("google-auth-user", 10);
+            
+            const newStudent = await db.query(
+                `INSERT INTO student (name, last_name, email, password, semester, image) 
+                 VALUES ($1, $2, $3, $4, 1, $5) RETURNING *`,
+                [given_name, family_name || "", email, defaultPassword, picture]
+            );
+            
+            student = newStudent.rows[0];
+        } else {
+            // 4. User EXISTS -> Just log them in
+            student = result.rows[0];
+        }
+
+        // 5. Generate JWT Token (Same as your normal SignIn)
+        const appToken = jwt.sign(
+            { id: student.id, name: student.name },
+            process.env.JWT_SECRET,
+            { expiresIn: '5h' }
+        );
+
+        res.json({ token: appToken, id: student.id });
+
+    } catch (err) {
+        console.error("Google Auth Error:", err);
+        res.status(500).send("Google Login Failed");
+    }
+};
+
+// Don't forget to export it!
+
 const SignUp = async (req, res) => {
     const { name, lastname, email, password, interests, lessons, semester } = req.body;
 
@@ -94,5 +152,6 @@ const SignOut = async (req, res) => {
 
 module.exports = {
     SignUp,
-    SignIn
+    SignIn,
+    GoogleSignIn
 };

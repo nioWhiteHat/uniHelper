@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
@@ -25,6 +25,10 @@ const NavBar = ({ SearchText, SetSearchText, SetPostId, InterestLabels, LessonLa
     const [showDropdown, setShowDropdown] = useState(false);
     
     const searchRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        SetPostId(null);
+        SetSearchText('');
+    },[InterestLabels,LessonLabels]);
 
     // 1. Debounce Logic: Wait 500ms after user stops typing before fetching
     useEffect(() => {

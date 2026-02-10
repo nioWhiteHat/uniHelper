@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
+import { GoogleLogin } from '@react-oauth/google';
 import "./SignUp.css";
 
 // Define types for our data
@@ -35,7 +36,22 @@ const SignUp = () => {
     const [selectedLessons, setSelectedLessons] = useState<number[]>([]);
 
     const [errors, setErrors] = useState<any>({});
-
+    const handleGoogleSuccess = async (credentialResponse: any) => {
+    // Exact same function as in SignIn.tsx
+    // It calls /GoogleSignIn which handles registration automatically
+        try {
+            const res = await fetch(`${API_URL}/GoogleSignIn`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: credentialResponse.credential })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                navigate('/FeedPage');
+            }
+        } catch (err) { console.error(err); }
+    };
     // --- 3. Fetch Options on Load ---
     useEffect(() => {
         const fetchData = async () => {
@@ -244,6 +260,10 @@ const SignUp = () => {
                     </div>
 
                     <button className="SignUpButton" onClick={handleSubmit}>Sign Up</button>
+
+                    <div style={{ margin: '20px auto', width: 'fit-content' }}>
+                        <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => console.log('Error')} />
+                    </div>
                     
                     <div className="LoginRedirect">
                         <span>Already have an account?</span>

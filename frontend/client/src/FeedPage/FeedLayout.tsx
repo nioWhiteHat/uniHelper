@@ -15,10 +15,7 @@ interface SharedProps{
 }
 
 export default function FeedPage(){
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
-    const SetMenuIsOpen = (isOpen:boolean)=>{
-        setMenuIsOpen(isOpen);
-    }
+    
     const [sharedProps, setSharedProps] = useState<SharedProps>({
         InterestLabels: [],
         LessonLabels: [],
@@ -59,13 +56,10 @@ export default function FeedPage(){
     }
     return(
         <div className="FeedPageContainer">
-            {menuIsOpen && 
-            <div className="DashboardMenuContainer">
-                <DashboardMenu MenuIsOpen={menuIsOpen} SetMenuIsOpen={SetMenuIsOpen}/>
-            </div>}
+            
             <div className="FeedLayout">
                 <div className="GeneralPanel">
-                    <BurgerButton MenuIsOpen={menuIsOpen} SetMenuIsOpen={SetMenuIsOpen} />
+                    
                     <NavBar SearchText={sharedProps.SearchText} SetSearchText={SetSearchText} SetPostId={SetPostId} InterestLabels={sharedProps.InterestLabels} LessonLabels={sharedProps.LessonLabels} />
                 </div>
                 

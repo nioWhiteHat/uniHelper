@@ -1,0 +1,69 @@
+.DashboardMenuContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker dimming effect */
+    z-index: 2000; /* On top of everything */
+    display: flex;
+}
+
+/* The actual sidebar menu */
+.DashboardMenu {
+    width: 280px;
+    height: 100%;
+    background-color: #1c1e21; /* Dark Theme Background */
+    color: #e4e6eb; /* Light text */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Close 'X' Button */
+.DashboardClose {
+    align-self: flex-end;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #b0b3b8;
+    padding: 5px 10px;
+    transition: color 0.2s;
+    margin-bottom: 20px;
+}
+
+.DashboardClose:hover {
+    color: #ffffff;
+}
+
+/* Menu Options */
+.DashboardOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.DashboardOption a {
+    text-decoration: none;
+    color: #e4e6eb;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+/* Bright Hover Effect */
+.DashboardOption a:hover {
+    background-color: #1877f2; /* Bright Facebook Blue */
+    color: #ffffff;
+    transform: translateX(5px); /* Slight movement effect */
+}

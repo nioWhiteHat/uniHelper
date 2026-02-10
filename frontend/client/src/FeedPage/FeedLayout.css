@@ -1,11 +1,136 @@
-/* General Reset */
+/* =========================================
+   1. GENERAL RESET & HIGH CONTRAST COLORS
+   ========================================= */
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #1c1e21;
+    background-color: #e9ebee; /* Slightly darker grey than before for better contrast */
+    color: #050505; /* Pure black text */
 }
 
+/* =========================================
+   2. DASHBOARD MENU (SIDEBAR)
+   ========================================= */
+/* The dark overlay behind the menu */
+.DashboardMenuContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker dimming effect */
+    z-index: 2000; /* On top of everything */
+    display: flex;
+}
+
+/* The actual sidebar menu */
+.DashboardMenu {
+    width: 280px;
+    height: 100%;
+    background-color: #1c1e21; /* Dark Theme Background */
+    color: #e4e6eb; /* Light text */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Close 'X' Button */
+.DashboardClose {
+    align-self: flex-end;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #b0b3b8;
+    padding: 5px 10px;
+    transition: color 0.2s;
+    margin-bottom: 20px;
+}
+
+.DashboardClose:hover {
+    color: #ffffff;
+}
+
+/* Menu Options */
+.DashboardOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.DashboardOption a {
+    text-decoration: none;
+    color: #e4e6eb;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+/* Bright Hover Effect */
+.DashboardOption a:hover {
+    background-color: #1877f2; /* Bright Facebook Blue */
+    color: #ffffff;
+    transform: translateX(5px); /* Slight movement effect */
+}
+
+/* =========================================
+   3. HEADER AREA (BURGER + NAVBAR)
+   ========================================= */
+.GeneralPanel {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 10px;
+}
+
+/* Burger Button Styling */
+.burger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.burger-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.burger-line {
+    width: 24px;
+    height: 3px;
+    background-color: #1c1e21; /* Dark lines */
+    border-radius: 2px;
+}
+
+/* Ensure NavBar takes remaining space inside GeneralPanel */
+.GeneralPanel .navbar-container {
+    flex: 1;
+    box-shadow: none; /* Remove navbar shadow since GeneralPanel has it */
+    padding-left: 0;
+    position: static; /* Let GeneralPanel handle stickiness */
+}
+
+/* =========================================
+   4. FEED LAYOUT
+   ========================================= */
 .FeedLayout {
     width: 100%;
     min-height: 100vh;
@@ -13,31 +138,24 @@ body {
     flex-direction: column;
 }
 
-/* --- MAIN CONTAINER LAYOUT --- */
 .FeedAndFiltersContainer {
-    /* 1. Make it a Flex Row */
     display: flex;
     flex-direction: row; 
-    align-items: flex-start; /* Aligns items to top */
+    align-items: flex-start;
     justify-content: center;
-    gap: 20px; /* Gap between Feed and Sidebar */
-    
-    /* 2. Increase Width to fit both columns */
-    max-width: 1000px; 
+    gap: 25px; /* Increased gap */
+    max-width: 1100px; 
     width: 100%;
-    margin: 20px auto;
+    margin: 25px auto;
     padding: 0 15px;
     box-sizing: border-box;
 }
 
-/* --- FEED COLUMN (Left) --- */
-/* We target the div that the <Feed /> component returns. 
-   Since we can't easily add a class to it without editing Feed.tsx, 
-   we assume it's the first child. */
+/* Feed Column */
 .FeedAndFiltersContainer > div:first-child {
-    flex: 1; /* Takes up all remaining space */
-    min-width: 0; /* Prevents flex issues with text overflow */
-    max-width: 650px; /* Optional: Stops feed from getting too wide */
+    flex: 1; 
+    min-width: 0; 
+    max-width: 650px; 
 }
 
 .FeedPostsContainer {
@@ -46,37 +164,39 @@ body {
     gap: 20px;
 }
 
-/* --- FILTER SIDEBAR (Right) --- */
+/* =========================================
+   5. FILTER SIDEBAR (RIGHT)
+   ========================================= */
 .FilterLabelsContainer {
-    width: 300px; /* Fixed width for sidebar */
+    width: 300px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Softer corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* More visible shadow */
     padding: 20px;
     box-sizing: border-box;
-
-    /* Sticky Positioning */
     position: sticky;
-    top: 80px; /* Stick 80px from top (accounts for NavBar height) */
+    top: 90px; 
     height: fit-content;
-    max-height: calc(100vh - 100px); /* Prevent it from being taller than screen */
-    overflow-y: auto; /* Scroll inside sidebar if too many tags */
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
 }
 
-/* --- FILTER LABELS STYLING --- */
-.InterestLabelsSection, 
-.LessonLabelsSection {
-    margin-bottom: 25px;
-}
-
+/* Headers */
 .FilterLabelsContainer h3 {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
     color: #65676b;
     margin-top: 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 8px;
+}
+
+.InterestLabelsSection, 
+.LessonLabelsSection {
+    margin-bottom: 30px;
 }
 
 .LabelsList {
@@ -85,41 +205,42 @@ body {
     gap: 8px;
 }
 
-/* The Buttons (Chips) */
+/* Filter Buttons (Darker Unselected State) */
 .LabelsList button {
-    background-color: #f0f2f5;
+    background-color: #e4e6eb; /* Darker grey than before */
     border: none;
     padding: 8px 12px;
-    border-radius: 18px;
+    border-radius: 20px;
     font-size: 13px;
-    font-weight: 500;
-    color: #050505;
+    font-weight: 600;
+    color: #050505; /* Darker text */
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .LabelsList button:hover {
-    background-color: #e4e6eb;
+    background-color: #d8dadf; /* Even darker on hover */
 }
 
-/* Active State (Selected) */
+/* Active State (Bright Blue) */
 .LabelsList button.active {
-    background-color: #e7f3ff; /* Blue background */
-    color: #1877f2; /* Blue text */
-    font-weight: 600;
-    box-shadow: inset 0 0 0 1px #1877f2; /* Blue border effect */
+    background-color: #1877f2; /* Bright Blue */
+    color: #ffffff; /* White text */
+    box-shadow: 0 2px 4px rgba(24, 119, 242, 0.3);
 }
 
-/* --- RESPONSIVE (Mobile) --- */
-@media (max-width: 850px) {
+/* =========================================
+   6. RESPONSIVE
+   ========================================= */
+@media (max-width: 900px) {
     .FeedAndFiltersContainer {
-        flex-direction: column-reverse; /* Put Filters ON TOP of Feed on mobile? */
-        /* Or just 'column' if you want filters at the bottom */
+        flex-direction: column-reverse; 
+        align-items: center;
     }
 
     .FilterLabelsContainer {
-        width: 100%; /* Full width on mobile */
-        position: static; /* Remove sticky on mobile */
+        width: 100%; 
+        position: static; 
         margin-bottom: 20px;
     }
     

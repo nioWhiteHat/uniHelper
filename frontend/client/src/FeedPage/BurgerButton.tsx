@@ -1,4 +1,4 @@
-import 'NavBar.css';
+import './NavBar.css';
 interface BurgerButtonProps {
     MenuIsOpen: boolean;
     SetMenuIsOpen: (isOpen: boolean) => void;
@@ -11,6 +11,7 @@ const BurgerButton = ({ MenuIsOpen, SetMenuIsOpen }: BurgerButtonProps) => {
             <span className="burger-line"></span>
             <span className="burger-line"></span>
             <span className="burger-line"></span>
+            
         </button>
     );
 };
